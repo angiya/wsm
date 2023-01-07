@@ -129,11 +129,29 @@ public class FileHandler {
                     consultation.setPatient(findPatient(split[4]));
                 }
                 consultations.add(consultation);
+                updateDoctorConsultations(consultation, split[3]);
+                updatePatientConsultations(consultation, split[4]);
             }
         } catch (Exception e) {
             System.out.println("Sorry there was an error in loading the data.");
         }
+
+
         return consultations;
+    }
+
+    private void updateDoctorConsultations(Consultation consultation, String medicalLicenseNumber) {
+        Doctor doctor = findDoctor(medicalLicenseNumber);
+        if (doctor != null) {
+            doctor.getBookings().add(consultation);
+        }
+    }
+
+    private void updatePatientConsultations(Consultation consultation, String patientId) {
+        Patient patient = findPatient(patientId);
+        if (patient != null) {
+            patient.getBookings().add(consultation);
+        }
     }
 
     private Patient findPatient(String patientId) {

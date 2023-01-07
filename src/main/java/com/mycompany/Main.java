@@ -2,7 +2,7 @@ package com.mycompany;
 
 public class Main {
 
-    static WestminsterSkinConsultationManager manager = new WestminsterSkinConsultationManager();
+    static final WestminsterSkinConsultationManager manager = new WestminsterSkinConsultationManager();
 
     public static void main(String[] args) {
         manager.loadData();

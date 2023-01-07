@@ -312,7 +312,7 @@ public class GraphicalUserInterface {
                         patient = getPatient(textName.getText(), textSurname.getText(), patients);
                         if (patient == null) {
                             patient = new Patient(textName.getText(), textSurname.getText(), dateOfBirth, textMobileNumber.getText(), patients.size() + 1);
-                            manager.getPatients().add(patient);
+                            WestminsterSkinConsultationManager.getPatients().add(patient);
                             scheduleConsultation(patient, rowIndex, bookingSlot, doctors, textCost.getText(), notes, manager);
                         } else {
                             scheduleConsultation(patient, rowIndex, bookingSlot, doctors, "25", notes, manager);
@@ -371,7 +371,7 @@ public class GraphicalUserInterface {
         if (doctorId > 0) {
             isAvailable = manager.checkAvailability(doctorId, bookingSlot);
             if (isAvailable) {
-                Doctor doctor = manager.getDoctors().get(doctorId);
+                Doctor doctor = WestminsterSkinConsultationManager.getDoctors().get(doctorId);
                 manager.createConsultation(patient, doctor, bookingSlot, cost, notes);
                 JOptionPane.showMessageDialog(null, "The consultation has been scheduled successfully.");
             } else {
@@ -381,7 +381,7 @@ public class GraphicalUserInterface {
                     int newDocId = ran.nextInt(doctors.size());
                     isAvailable = manager.checkAvailability(newDocId, bookingSlot);
                     if (isAvailable) {
-                        Doctor doctor = manager.getDoctors().get(doctorId);
+                        Doctor doctor = WestminsterSkinConsultationManager.getDoctors().get(doctorId);
                         manager.createConsultation(patient, doctor, bookingSlot, cost, notes);
                         break;
                     }

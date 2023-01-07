@@ -10,9 +10,9 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
     private static List<Patient> patients;
     private List<Consultation> consultations;
 
-    InputHandler inputHandler = new InputHandler();
-    FileHandler fileHandler  = new FileHandler();
-    GraphicalUserInterface GUI = new GraphicalUserInterface();
+    final InputHandler inputHandler = new InputHandler();
+    final FileHandler fileHandler  = new FileHandler();
+    final GraphicalUserInterface GUI = new GraphicalUserInterface();
 
 
     public WestminsterSkinConsultationManager() {
