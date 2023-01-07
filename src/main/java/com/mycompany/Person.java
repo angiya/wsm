@@ -1,15 +1,17 @@
 package com.mycompany;
 
+import java.time.LocalDate;
+
 public class Person {
     private String name;
     private String surname;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
     private String mobileNumber;
 
     public Person() {
     }
 
-    public Person(String name, String surname, String dob, String mobileNumber) {
+    public Person(String name, String surname, LocalDate dob, String mobileNumber) {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dob;
@@ -32,11 +34,11 @@ public class Person {
         this.surname = surname;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

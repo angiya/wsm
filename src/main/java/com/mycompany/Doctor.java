@@ -1,6 +1,7 @@
 package com.mycompany;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +15,8 @@ public class Doctor extends Person {
         bookings = new ArrayList<>();
     }
 
-    public Doctor(String name, String surname, String dob, String mobileNumber, String medicalLicenceNumber, String specialisation) {
-        super(name, surname, dob, mobileNumber);
+    public Doctor(String name, String surname, LocalDate dateOfBirth, String mobileNumber, String medicalLicenceNumber, String specialisation) {
+        super(name, surname, dateOfBirth, mobileNumber);
         this.medicalLicenceNumber = medicalLicenceNumber;
         this.specialisation = specialisation;
         bookings = new ArrayList<>();

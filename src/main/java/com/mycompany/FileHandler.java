@@ -1,6 +1,7 @@
 package com.mycompany;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class FileHandler {
                 for (int i = 0; i < split.length; i++) {
                     doctor.setName(split[0]);
                     doctor.setSurname(split[1]);
-                    doctor.setDateOfBirth(split[2]);
+                    doctor.setDateOfBirth(LocalDate.parse(split[2]));
                     doctor.setMobileNumber(split[3]);
                     doctor.setMedicalLicenceNumber(split[4]);
                     doctor.setSpecialisation(split[5]);
@@ -80,7 +81,7 @@ public class FileHandler {
                 for (int i = 0; i < split.length; i++) {
                     patient.setName(split[0]);
                     patient.setSurname(split[1]);
-                    patient.setDateOfBirth(split[2]);
+                    patient.setDateOfBirth(LocalDate.parse(split[2]));
                     patient.setMobileNumber(split[3]);
                     patient.setId(Integer.parseInt(split[4]));
                 }

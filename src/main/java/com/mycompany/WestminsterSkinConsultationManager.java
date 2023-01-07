@@ -1,13 +1,15 @@
 package com.mycompany;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
 public class WestminsterSkinConsultationManager implements SkinConsultationManager {
 
-    private final Scanner scanner = new Scanner(System.in);
     private List<Doctor> doctors;
     private List<Patient> patients;
+
+    InputHandler inputHandler = new InputHandler();
     FileHandler fileHandler  = new FileHandler();
     GraphicalUserInterface GUI = new GraphicalUserInterface();
 
@@ -15,9 +17,11 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
     public WestminsterSkinConsultationManager() {
     }
 
+
     public List<Doctor> getDoctors() {
         return doctors;
     }
+
 
     public List<Patient> getPatients() {
         return patients;
@@ -25,58 +29,25 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
 
 
     public int selection() {
-        System.out.println("\nUse the console to provide your selection.\n\n" +
-                "1 : Add Doctor\n" +
-                "2 : Delete Doctor\n" +
-                "3 : Display Doctors\n" +
-                "4 : Save data\n" +
-                "5 : Open Graphical User Interface\n" +
-                "6 : Exit Program\n");
-        System.out.println("Please enter your selection : ");
-        int selection = scanner.nextInt();
-        scanner.nextLine();
-        return selection;
+        return inputHandler.selection();
     }
 
 
     @Override
     public void addDoctor() {
-        String name, surname;
-        String dateOfBirth;
-        String mobileNumber, medicalLicenceNumber;
-        while (true) {
-            System.out.println("Please enter the doctor's name : ");
-            name = scanner.nextLine();
-            System.out.println("Please enter the doctor's surname");
-            surname = scanner.nextLine();
-            if (name.matches("[a-zA-Z_]+") || surname.matches("[a-zA-Z_]+")) break;
-            System.out.println("Please enter a valid name.");
-        }
+        String name = inputHandler.enterText("name");
+        String surname = inputHandler.enterText("surname");
+        LocalDate dateOfBirth = inputHandler.enterDateOfBirth();
+        String mobileNumber = inputHandler.enterNumber("Mobile");
+        String medicalLicenceNumber = inputHandler.enterNumber("Medical License");
+        String specialisation = inputHandler.enterText("specialisation");
 
-        System.out.println("Please enter the doctor's date of birth : (dd/mm/yyyy)");
-        dateOfBirth = scanner.nextLine();
-
-        while (true) {
-            System.out.println("Please enter the doctor's mobile number");
-            mobileNumber = scanner.nextLine();
-            if(mobileNumber.matches("[0-9]+")) break;
-            System.out.println("Please enter a valid mobile number");
-        }
-        while (true) {
-            System.out.println("Please enter the doctor's Medical Licence Number");
-            medicalLicenceNumber = scanner.nextLine();
-            if(medicalLicenceNumber.matches("[0-9]+")) break;
-            System.out.println("Please enter a valid Medical Licence Number");
-        }
-
-        System.out.println("Please enter the doctor's specialisation");
-        String specialisation = scanner.nextLine();
         if (doctors.size() < 10) {
             Doctor doctor = new Doctor(name, surname, dateOfBirth, mobileNumber, medicalLicenceNumber, specialisation);
             doctors.add(doctor);
             System.out.println("The doctor has been added successfully.");
         } else {
-            System.out.println("Sorry. This Consultation Center can only accommodate 10 doctors");
+            System.out.println("Sorry. This Consultation Center can only accommodate 10 doctors.");
         }
     }
 
@@ -84,13 +55,7 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
     @Override
     public void deleteDoctor() {
         boolean wasDeleted = false;
-        String medicalLicenceNumber;
-        while (true) {
-            System.out.println("Please enter the doctor's Medical Licence Number");
-            medicalLicenceNumber = scanner.nextLine();
-            if(medicalLicenceNumber.matches("[0-9]+")) break;
-            System.out.println("The Medical Licence Number you entered is not valid.");
-        }
+        String medicalLicenceNumber =  inputHandler.enterNumber("Medical License");
         for (Doctor doctor : doctors) {
             if (doctor.getMedicalLicenceNumber().equals(medicalLicenceNumber)) {
                 doctors.remove(doctor);
@@ -105,7 +70,7 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
 
     @Override
     public void displayDoctors() {
-        Collections.sort(doctors, new Comparator<Doctor>() {
+        doctors.sort(new Comparator<>() {
             @Override
             public int compare(Doctor o1, Doctor o2) {
                 return o1.getSurname().compareTo(o2.getSurname());
@@ -121,37 +86,15 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
     }
 
 
-    public List<Consultation> getBookings(String name, String surname) {
-        Patient currentPatient = null;
-        for (Patient patient : patients) {
-            if (patient.getName().equals(name) && patient.getSurname().equals(surname)) {
-                currentPatient = patient;
-            }
-        }
-        if(currentPatient != null) {
-            return currentPatient.getBookings();
-        } else {
-            return null;
-        }
-
-    }
-
-
-    public Patient getPatient(String name, String surname) {
-        for (Patient patient : patients) {
-            if (patient.getName().equals(name) && patient.getSurname().equals(surname)) return patient;
-        }
-        return null;
-    }
-
-
-    public void scheduleConsultation(Patient patient, Doctor doctor, LocalDateTime bookingSlot, String cost, String notes) {
+    @Override
+    public void createConsultation(Patient patient, Doctor doctor, LocalDateTime bookingSlot, String cost, String notes) {
         Consultation consultation = new Consultation(bookingSlot, doctor, patient, Integer.parseInt(cost), notes);
         doctor.getBookings().add(consultation);
         patient.getBookings().add(consultation);
     }
 
 
+    @Override
     public boolean checkAvailability(int doctorId, LocalDateTime bookingSlot) {
         Doctor doctor = doctors.get(doctorId);
         for (Consultation consultation : doctor.getBookings()) {
@@ -161,17 +104,20 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
     }
 
 
+    @Override
     public void saveData() {
         fileHandler.saveData(doctors, patients);
     }
 
 
+    @Override
     public void loadData() {
         doctors = fileHandler.loadDoctorData();
         patients = fileHandler.loadPatientData();
     }
 
 
+    @Override
     public void runGUI() {
         GUI.run(doctors, patients, this);
     }

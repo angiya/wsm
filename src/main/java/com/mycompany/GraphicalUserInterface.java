@@ -4,7 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -20,7 +23,7 @@ public class GraphicalUserInterface {
         for (int i = 0; i < doctors.size(); i++) {
             data[i][0] = doctors.get(i).getSurname();
             data[i][1] = doctors.get(i).getName();
-            data[i][2] = doctors.get(i).getDateOfBirth();
+            data[i][2] = String.valueOf(doctors.get(i).getDateOfBirth());
             data[i][3] = doctors.get(i).getMobileNumber();
             data[i][4] = doctors.get(i).getMedicalLicenceNumber();
             data[i][5] = doctors.get(i).getSpecialisation();
@@ -122,7 +125,7 @@ public class GraphicalUserInterface {
         frame.getContentPane().add(submitButton);
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                Patient patient = null;
+                Patient patient;
                 if(textName.getText().isEmpty()||(textSurname.getText().isEmpty()))
                     JOptionPane.showMessageDialog(null, "Please fill all required details.");
                 else {
@@ -144,7 +147,7 @@ public class GraphicalUserInterface {
         String[][] data = new String[patient.getBookings().size()][4];
         String[] columns = {" Date & Time ", " Doctor ", " Cost ", " Notes "};
 
-        bookings.sort(new Comparator<Consultation>() {
+        bookings.sort(new Comparator<>() {
             @Override
             public int compare(Consultation o1, Consultation o2) {
                 return o1.getDateTime().compareTo(o2.getDateTime());
@@ -295,7 +298,7 @@ public class GraphicalUserInterface {
         frame.getContentPane().add(submitButton);
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                Patient patient = null;
+                Patient patient;
                 if(textName.getText().isEmpty()||(textSurname.getText().isEmpty()))
                     JOptionPane.showMessageDialog(null, "Please fill all required details.");
                 else {
@@ -304,16 +307,18 @@ public class GraphicalUserInterface {
                                 Integer.parseInt(BookingDateMonth.getText()),
                                 Integer.parseInt(BookingDateMonth.getText()),
                                 Integer.parseInt(textBookingTime.getText()), 0);
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                        LocalDate dateOfBirth = LocalDate.parse(textDob.getText(), formatter);
                         patient = getPatient(textName.getText(), textSurname.getText(), patients);
                         if (patient == null) {
-                            patient = new Patient(textName.getText(), textSurname.getText(), textDob.getText(), textMobileNumber.getText(), patients.size() + 1);
+                            patient = new Patient(textName.getText(), textSurname.getText(), dateOfBirth, textMobileNumber.getText(), patients.size() + 1);
                             manager.getPatients().add(patient);
                             scheduleConsultation(patient, rowIndex, bookingSlot, doctors, textCost.getText(), notes, manager);
                         } else {
                             scheduleConsultation(patient, rowIndex, bookingSlot, doctors, "25", notes, manager);
                         }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "There was an error. Please try again.");
+                    } catch (DateTimeParseException e) {
+                        JOptionPane.showMessageDialog(null, "Please Enter a valid date.");
                         e.printStackTrace();
                     }
                 }
@@ -367,7 +372,7 @@ public class GraphicalUserInterface {
             isAvailable = manager.checkAvailability(doctorId, bookingSlot);
             if (isAvailable) {
                 Doctor doctor = manager.getDoctors().get(doctorId);
-                manager.scheduleConsultation(patient, doctor, bookingSlot, cost, notes);
+                manager.createConsultation(patient, doctor, bookingSlot, cost, notes);
                 JOptionPane.showMessageDialog(null, "The consultation has been scheduled successfully.");
             } else {
                 JOptionPane.showMessageDialog(null, "The doctor you looked for is not available on your booking slot.");
@@ -377,7 +382,7 @@ public class GraphicalUserInterface {
                     isAvailable = manager.checkAvailability(newDocId, bookingSlot);
                     if (isAvailable) {
                         Doctor doctor = manager.getDoctors().get(doctorId);
-                        manager.scheduleConsultation(patient, doctor, bookingSlot, cost, notes);
+                        manager.createConsultation(patient, doctor, bookingSlot, cost, notes);
                         break;
                     }
                 }
