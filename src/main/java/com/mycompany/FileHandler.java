@@ -2,6 +2,7 @@ package com.mycompany;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +10,11 @@ public class FileHandler {
     BufferedReader br;
     static final File doctorFile = new File("doctors.txt");
     static final File patientFile = new File("patients.txt");
+    static final File consultationFile = new File("consultations.txt");
 
-    public void saveData(List<Doctor> doctors, List<Patient> patients) {
-        BufferedWriter bf = null;
+
+    public void saveData(List<Doctor> doctors, List<Patient> patients, List<Consultation> consultations) {
+        BufferedWriter bf;
         try {
             bf = new BufferedWriter(new FileWriter(doctorFile));
             for (Doctor doctor : doctors) {
@@ -36,6 +39,21 @@ public class FileHandler {
                         patient.getSurname() + "|" +
                         patient.getDateOfBirth() + "|" +
                         patient.getMobileNumber());
+                bf.newLine();
+            }
+            bf.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            bf = new BufferedWriter(new FileWriter(consultationFile));
+            for (Consultation consultation : consultations) {
+                bf.write(consultation.getDateTime() + "|" +
+                        consultation.getCost() + "|" +
+                        consultation.getNotes() + "|" +
+                        consultation.getDoctor().getMedicalLicenceNumber() + "|" +
+                        consultation.getPatient().getId());
                 bf.newLine();
             }
             bf.flush();
@@ -91,5 +109,50 @@ public class FileHandler {
             System.out.println("Sorry there was an error in loading the data.");
         }
         return patients;
+    }
+
+
+    public List<Consultation> loadConsultationData() {
+        List<Consultation> consultations = new ArrayList<>();
+        try {
+            String line;
+            br = new BufferedReader(new FileReader(consultationFile));
+
+            while ((line = br.readLine()) != null) {
+                String[] split = line.split("\\|");
+                Consultation consultation = new Consultation();
+                for (int i = 0; i < split.length; i++) {
+                    consultation.setDateTime(LocalDateTime.parse(split[0]));
+                    consultation.setCost(Integer.parseInt(split[1]));
+                    consultation.setNotes(split[2]);
+                    consultation.setDoctor(findDoctor(split[3]));
+                    consultation.setPatient(findPatient(split[4]));
+                }
+                consultations.add(consultation);
+            }
+        } catch (Exception e) {
+            System.out.println("Sorry there was an error in loading the data.");
+        }
+        return consultations;
+    }
+
+    private Patient findPatient(String patientId) {
+        List<Patient> patients = WestminsterSkinConsultationManager.getPatients();
+        for (Patient patient : patients) {
+            if (String.valueOf(patient.getId()).equals(patientId)) {
+                return patient;
+            }
+        }
+        return null;
+    }
+
+    private Doctor findDoctor(String medicalLicenseNumber) {
+        List<Doctor> doctors = WestminsterSkinConsultationManager.getDoctors();
+        for (Doctor doctor : doctors) {
+            if (doctor.getMedicalLicenceNumber().equals(medicalLicenseNumber)) {
+                return doctor;
+            }
+        }
+        return null;
     }
 }

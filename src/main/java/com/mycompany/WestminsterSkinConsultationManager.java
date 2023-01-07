@@ -6,8 +6,9 @@ import java.util.*;
 
 public class WestminsterSkinConsultationManager implements SkinConsultationManager {
 
-    private List<Doctor> doctors;
-    private List<Patient> patients;
+    private static List<Doctor> doctors;
+    private static List<Patient> patients;
+    private List<Consultation> consultations;
 
     InputHandler inputHandler = new InputHandler();
     FileHandler fileHandler  = new FileHandler();
@@ -18,12 +19,12 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
     }
 
 
-    public List<Doctor> getDoctors() {
+    public static List<Doctor> getDoctors() {
         return doctors;
     }
 
 
-    public List<Patient> getPatients() {
+    public static List<Patient> getPatients() {
         return patients;
     }
 
@@ -91,6 +92,7 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
         Consultation consultation = new Consultation(bookingSlot, doctor, patient, Integer.parseInt(cost), notes);
         doctor.getBookings().add(consultation);
         patient.getBookings().add(consultation);
+        consultations.add(consultation);
     }
 
 
@@ -106,7 +108,7 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
 
     @Override
     public void saveData() {
-        fileHandler.saveData(doctors, patients);
+        fileHandler.saveData(doctors, patients, consultations);
     }
 
 
@@ -114,6 +116,7 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
     public void loadData() {
         doctors = fileHandler.loadDoctorData();
         patients = fileHandler.loadPatientData();
+        consultations = fileHandler.loadConsultationData();
     }
 
 

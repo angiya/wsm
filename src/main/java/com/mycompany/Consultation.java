@@ -10,6 +10,9 @@ public class Consultation {
     private Doctor doctor;
     private Patient patient;
 
+    public Consultation() {
+    }
+
     public Consultation(LocalDateTime dateTime, Doctor doctor, Patient patient, int cost, String notes) {
         this.dateTime = dateTime;
         this.doctor = doctor;
