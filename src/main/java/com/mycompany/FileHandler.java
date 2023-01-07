@@ -97,11 +97,12 @@ public class FileHandler {
                 String[] split = line.split("\\|");
                 Patient patient = new Patient();
                 for (int i = 0; i < split.length; i++) {
-                    patient.setName(split[0]);
-                    patient.setSurname(split[1]);
-                    patient.setDateOfBirth(LocalDate.parse(split[2]));
-                    patient.setMobileNumber(split[3]);
-                    patient.setId(Integer.parseInt(split[4]));
+                    patient.setId(Integer.parseInt(split[0]));
+                    patient.setName(split[1]);
+                    patient.setSurname(split[2]);
+                    patient.setDateOfBirth(LocalDate.parse(split[3]));
+                    patient.setMobileNumber(split[4]);
+
                 }
                 patients.add(patient);
             }
