@@ -155,7 +155,7 @@ public class GraphicalUserInterface {
             data[i][0] = bookings.get(i).getDateTime().toString();
             data[i][1] = bookings.get(i).getDoctor().getSurname() + " " + bookings.get(i).getDoctor().getName();
             data[i][2] = String.valueOf(bookings.get(i).getCost());
-            data[i][3] = bookings.get(i).getNotes(); // TODO : images?
+            data[i][3] = bookings.get(i).getNotes();
         }
 
         JFrame frame = new JFrame("Your Bookings");
@@ -173,8 +173,6 @@ public class GraphicalUserInterface {
 
 
     private void bookConsultation(List<Patient> patients, List<Doctor> doctors, int rowIndex, WestminsterSkinConsultationManager manager) {
-        String notes = "";
-
         JFrame frame = new JFrame("Schedule new consultation");
         frame.setBounds(100, 100, 400, 450);
         frame.getContentPane().setLayout(null);
@@ -230,11 +228,18 @@ public class GraphicalUserInterface {
         notesLabel.setBounds(15, 185, 75, 20);
         frame.getContentPane().add(notesLabel);
 
+        String notes = "";
         JButton addNotesButton  = new JButton("Add Notes");
         addNotesButton.setFont(new Font("Arial", Font.BOLD, 10));
         addNotesButton.setBounds(160, 185, 100, 20);
         frame.getContentPane().add(addNotesButton);
-        // TODO : create add notes method | eventListener
+        addNotesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                final String finalNotes = addNotes();
+                JOptionPane.showMessageDialog(null, "Notes added successfully.");
+            }
+        });
 
         JLabel cost = new JLabel("Cost : ");
         cost.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -314,6 +319,45 @@ public class GraphicalUserInterface {
                 }
             }
         });
+    }
+
+
+    private String addNotes() {
+        final String[] notes = {""};
+        JFrame frame = new JFrame("Add Notes");
+        frame.setBounds(100, 100, 400, 170);
+        frame.getContentPane().setLayout(null);
+        frame.setResizable(false);
+        frame.setVisible(true);
+
+        final JLabel[] notesLabel = {new JLabel("Write your notes : ")};
+        notesLabel[0].setFont(new Font("Arial", Font.PLAIN, 13));
+        notesLabel[0].setBounds(12, 31, 75, 20);
+        frame.getContentPane().add(notesLabel[0]);
+
+        JTextArea textNotes = new JTextArea();
+        textNotes.setFont(new Font("Arial", Font.PLAIN, 12));
+        textNotes.setSize(190, 20);
+        textNotes.setBounds(100, 28, 275, 40);
+        textNotes.setColumns(10);
+        frame.getContentPane().add(textNotes);
+
+        JButton addImage  = new JButton("Add Image");
+        addImage.setFont(new Font("Arial", Font.BOLD, 10));
+        addImage.setBounds(160, 185, 100, 20);
+        frame.getContentPane().add(addImage);
+
+        JButton submitButton = new JButton("Submit");
+        submitButton.setFont(new Font("Arial", Font.PLAIN, 12));
+        submitButton.setSize(100, 20);
+        submitButton.setBounds(250, 100, 100, 20);
+        frame.getContentPane().add(submitButton);
+        submitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                notes[0] = textNotes.getText();
+            }
+        });
+        return notes[0];
     }
 
 
