@@ -11,6 +11,7 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
     FileHandler fileHandler  = new FileHandler();
     GraphicalUserInterface GUI = new GraphicalUserInterface();
 
+
     public WestminsterSkinConsultationManager() {
     }
 
@@ -22,13 +23,6 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
         return patients;
     }
 
-    public void setDoctors(List<Doctor> doctors) {
-        this.doctors = doctors;
-    }
-
-    public void setPatients(List<Patient> patients) {
-        this.patients = patients;
-    }
 
     public int selection() {
         System.out.println("\nUse the console to provide your selection.\n\n" +
@@ -44,6 +38,7 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
         return selection;
     }
 
+
     @Override
     public void addDoctor() {
         String name, surname;
@@ -54,8 +49,8 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
             name = scanner.nextLine();
             System.out.println("Please enter the doctor's surname");
             surname = scanner.nextLine();
-            // TODO : add regex
-            if (!name.contains("21") || !surname.contains("./")) break;
+            if (name.matches("[a-zA-Z_]+") || surname.matches("[a-zA-Z_]+")) break;
+            System.out.println("Please enter a valid name.");
         }
 
         System.out.println("Please enter the doctor's date of birth : (dd/mm/yyyy)");
@@ -64,14 +59,14 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
         while (true) {
             System.out.println("Please enter the doctor's mobile number");
             mobileNumber = scanner.nextLine();
-            // TODO : add regex
-            if(!mobileNumber.contains("awba")) break;
+            if(mobileNumber.matches("[0-9]+")) break;
+            System.out.println("Please enter a valid mobile number");
         }
         while (true) {
             System.out.println("Please enter the doctor's Medical Licence Number");
             medicalLicenceNumber = scanner.nextLine();
-            // TODO : add regex
-            if(!medicalLicenceNumber.contains("awba")) break;
+            if(medicalLicenceNumber.matches("[0-9]+")) break;
+            System.out.println("Please enter a valid Medical Licence Number");
         }
 
         System.out.println("Please enter the doctor's specialisation");
@@ -85,27 +80,30 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
         }
     }
 
+
     @Override
     public void deleteDoctor() {
+        boolean wasDeleted = false;
         String medicalLicenceNumber;
         while (true) {
             System.out.println("Please enter the doctor's Medical Licence Number");
             medicalLicenceNumber = scanner.nextLine();
-            // TODO : add regex
-            if(!medicalLicenceNumber.contains("awba")) break;
+            if(medicalLicenceNumber.matches("[0-9]+")) break;
             System.out.println("The Medical Licence Number you entered is not valid.");
         }
         for (Doctor doctor : doctors) {
             if (doctor.getMedicalLicenceNumber().equals(medicalLicenceNumber)) {
                 doctors.remove(doctor);
                 System.out.println("The doctor has been removed successfully");
+                wasDeleted = true;
                 break;
             }
         }
-        // TODO : IF removed -> dont show
-        System.out.println("The Medical Licence Number is not available.");
+        if (!wasDeleted) System.out.println("The Medical Licence Number is not available.");
     }
 
+
+    @Override
     public void displayDoctors() {
         Collections.sort(doctors, new Comparator<Doctor>() {
             @Override
@@ -121,6 +119,7 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
                     "\nSpecialisation : " + doctor.getSpecialisation() + "\n");
         }
     }
+
 
     public List<Consultation> getBookings(String name, String surname) {
         Patient currentPatient = null;
@@ -146,12 +145,12 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
     }
 
 
-
     public void scheduleConsultation(Patient patient, Doctor doctor, LocalDateTime bookingSlot, String cost, String notes) {
-        System.out.println("Doc ----> " + doctors.size());
         Consultation consultation = new Consultation(bookingSlot, doctor, patient, Integer.parseInt(cost), notes);
         doctor.getBookings().add(consultation);
+        patient.getBookings().add(consultation);
     }
+
 
     public boolean checkAvailability(int doctorId, LocalDateTime bookingSlot) {
         Doctor doctor = doctors.get(doctorId);
@@ -166,13 +165,14 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
         fileHandler.saveData(doctors, patients);
     }
 
+
     public void loadData() {
         doctors = fileHandler.loadDoctorData();
         patients = fileHandler.loadPatientData();
     }
 
+
     public void runGUI() {
         GUI.run(doctors, patients, this);
     }
-
 }

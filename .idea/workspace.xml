@@ -4,23 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbebceba-eaff-4fe9-b83d-7ac3d74d392e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/Consultation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/Doctor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/FileHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/GraphicalUserInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/Patient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/Person.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/SkinConsultationManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/WestminsterSkinConsultationManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/mycompany/WestminsterSkinConsultationManagerTest.java" afterDir="false" />
+    <list default="true" id="fbebceba-eaff-4fe9-b83d-7ac3d74d392e" name="Changes" comment="The goddamn project">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/GraphicalUserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/GraphicalUserInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/WestminsterSkinConsultationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/WestminsterSkinConsultationManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/mycompany/WestminsterSkinConsultationManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/mycompany/WestminsterSkinConsultationManagerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +84,14 @@
       <option name="presentableId" value="Default" />
       <updated>1673078432399</updated>
     </task>
+    <task id="LOCAL-00001" summary="The goddamn project">
+      <created>1673104484898</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1673104484898</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -109,64 +105,22 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="The goddamn project" />
+    <option name="LAST_COMMIT_MESSAGE" value="The goddamn project" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/GraphicalUserInterface.java</url>
-          <line>326</line>
-          <option name="timeStamp" value="10" />
+          <line>180</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/WestminsterSkinConsultationManager.java</url>
-          <line>152</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/GraphicalUserInterface.java</url>
-          <line>332</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/GraphicalUserInterface.java</url>
-          <line>318</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/GraphicalUserInterface.java</url>
-          <line>363</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/GraphicalUserInterface.java</url>
-          <line>344</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/GraphicalUserInterface.java</url>
-          <line>342</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/WestminsterSkinConsultationManager.java</url>
-          <line>156</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/WestminsterSkinConsultationManager.java</url>
-          <line>174</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/GraphicalUserInterface.java</url>
-          <line>325</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/GraphicalUserInterface.java</url>
-          <line>324</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.ExceptionInInitializerError" package="java.lang" />
+          <option name="timeStamp" value="36" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

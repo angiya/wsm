@@ -12,7 +12,7 @@ import java.util.Random;
 public class GraphicalUserInterface {
     static JFrame frame;
     static JTable table;
-    static final String[] columns = {"Surname", "Name", "Date Of Birth", "Mobile Number", "Medical Licence Number", "Specialisation"};
+    static final String[] columns = {"Surname", "Name", "Birthday", "# Number", "MLN", "Spec."};
 
 
     public String[][] populateTable(List<Doctor> doctors) {
@@ -37,54 +37,34 @@ public class GraphicalUserInterface {
     }
 
 
-    private void sortAlphabetically(List<Doctor> doctors) {
-        // TODO : send to table
-        doctors.sort(new Comparator<>() {
-            @Override
-            public int compare(Doctor o1, Doctor o2) {
-                return o1.getSurname().compareTo(o2.getSurname());
-            }
-        });
-    }
-
-
     public void run(List<Doctor> doctors, List<Patient> patients, WestminsterSkinConsultationManager manager) {
         String[][] data = populateTable(doctors);
         frame = new JFrame("Westminster Skin Consultation Manager");
         frame.setLayout(new FlowLayout(FlowLayout.LEADING));
-        frame.setSize(700, 270);
+        frame.setSize(500, 230);
 
         /* Creating panels for components */
         JPanel tablePanel = new JPanel();
-        tablePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
-        tablePanel.setBounds(0,0,700,300);
+        tablePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        tablePanel.setBounds(0,0,500,300);
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
-        buttonPanel.setBounds(0,300,1000,250);
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.setBounds(0,300,400,250);
 
         /* Creating Table */
         table = new JTable(data, columns);
         table.setPreferredScrollableViewportSize(table.getPreferredSize());
         table.setFillsViewportHeight(true);
+        table.setAutoCreateRowSorter(true);
         table.setBounds(0,0,100,100);
         JScrollPane scrollPane =new JScrollPane(table);
         tablePanel.add(scrollPane);
 
-        /* Creating Labels for Buttons */
-        JLabel label = new JLabel();
-        label.setText("Sort by : ");
-        label.setPreferredSize(new Dimension(110,30));
-        buttonPanel.add(label);
-
-        JButton ascendingButton = new JButton("Sort (Alphabetically)");
-        ascendingButton.addActionListener(e -> sortAlphabetically(doctors));
-        buttonPanel.add(ascendingButton);
-
+        /* Creating Buttons */
         JButton bookConsultationButton = new JButton("Book Consultation");
         bookConsultationButton.addActionListener(e -> {
             int rowIndex = table.getSelectedRow();
-            System.out.println("row : " + rowIndex);
             if (rowIndex >= 0 && rowIndex < doctors.size()) {
                 bookConsultation(patients, doctors, rowIndex, manager);
             } else {
@@ -124,7 +104,7 @@ public class GraphicalUserInterface {
         frame.getContentPane().add(textName);
 
         JLabel surname = new JLabel("Surname : ");
-        surname.setFont(new Font("Arial", Font.PLAIN, 13));
+        surname.setFont(new Font("Arial", Font.PLAIN, 12));
         surname.setSize(100, 20);
         surname.setBounds(12, 68, 75, 20);
         frame.getContentPane().add(surname);
@@ -160,10 +140,9 @@ public class GraphicalUserInterface {
 
 
     private void displayBookings(Patient patient) {
-        // TODO : Display the goddamn bookings
         List<Consultation> bookings = patient.getBookings();
-        String[][] data = new String[patient.getBookings().size()][3];
-        String[] columns = {" Date & Time ", " Doctor ", " Notes "};
+        String[][] data = new String[patient.getBookings().size()][4];
+        String[] columns = {" Date & Time ", " Doctor ", " Cost ", " Notes "};
 
         bookings.sort(new Comparator<Consultation>() {
             @Override
@@ -173,9 +152,10 @@ public class GraphicalUserInterface {
         });
 
         for (int i = 0; i < bookings.size(); i++) {
-            data[i][0] = bookings.get(i).getDateTime().toString(); // TODO : CHECK
+            data[i][0] = bookings.get(i).getDateTime().toString();
             data[i][1] = bookings.get(i).getDoctor().getSurname() + " " + bookings.get(i).getDoctor().getName();
-            data[i][2] = bookings.get(i).getNotes(); // TODO : images?
+            data[i][2] = String.valueOf(bookings.get(i).getCost());
+            data[i][3] = bookings.get(i).getNotes(); // TODO : images?
         }
 
         JFrame frame = new JFrame("Your Bookings");
@@ -325,11 +305,10 @@ public class GraphicalUserInterface {
                             manager.getPatients().add(patient);
                             scheduleConsultation(patient, rowIndex, bookingSlot, doctors, textCost.getText(), notes, manager);
                         } else {
-                            JOptionPane.showMessageDialog(null, "Patient is already registered.");
                             scheduleConsultation(patient, rowIndex, bookingSlot, doctors, "25", notes, manager);
                         }
                     } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "The date you entered is invalid.");
+                        JOptionPane.showMessageDialog(null, "There was an error. Please try again.");
                         e.printStackTrace();
                     }
                 }
@@ -345,6 +324,7 @@ public class GraphicalUserInterface {
             if (isAvailable) {
                 Doctor doctor = manager.getDoctors().get(doctorId);
                 manager.scheduleConsultation(patient, doctor, bookingSlot, cost, notes);
+                JOptionPane.showMessageDialog(null, "The consultation has been scheduled successfully.");
             } else {
                 JOptionPane.showMessageDialog(null, "The doctor you looked for is not available on your booking slot.");
                 while (true) {
