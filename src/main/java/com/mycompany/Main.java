@@ -3,18 +3,19 @@ package com.mycompany;
 public class Main {
 
     static final WestminsterSkinConsultationManager manager = new WestminsterSkinConsultationManager();
+    static final InputHandler inputHandler = new InputHandler();
 
     public static void main(String[] args) {
         manager.loadData();
         System.out.println("Welcome to the Formula 1 Championship Manager!");
         while (true) {
-            int selection = manager.selection();
+            int selection = inputHandler.selection();
             switch (selection) {
                 case 1:
-                    manager.addDoctor();
+                    inputHandler.handleAddDoctor();
                     break;
                 case 2:
-                    manager.deleteDoctor();
+                    inputHandler.handleDeleteDoctor();
                     break;
                 case 3:
                     manager.displayDoctors();

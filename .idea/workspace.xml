@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbebceba-eaff-4fe9-b83d-7ac3d74d392e" name="Changes" comment="add consultation to entities">
+    <list default="true" id="fbebceba-eaff-4fe9-b83d-7ac3d74d392e" name="Changes" comment="final">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/FileHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/GraphicalUserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/GraphicalUserInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/InputHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/InputHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/SkinConsultationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/SkinConsultationManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/WestminsterSkinConsultationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/WestminsterSkinConsultationManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/mycompany/WestminsterSkinConsultationManagerTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +24,7 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit4 Test Class" />
       </list>
     </option>
   </component>
@@ -47,8 +53,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "last_directory_selection": "D:/AL/WSM/src/test/java/com/mycompany",
     "last_opened_file_path": "D:/AL/Project 429",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
@@ -64,9 +72,23 @@
       <recent name="com.mycompany" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.mycompany.Main" />
+  <component name="RunManager" selected="JUnit.WestminsterSkinConsultationManagerTest2">
+    <configuration name="WestminsterSkinConsultationManagerTest2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="WSM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mycompany.WestminsterSkinConsultationManagerTest2" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.mycompany" />
+      <option name="MAIN_CLASS_NAME" value="com.mycompany.WestminsterSkinConsultationManagerTest2" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WestminsterSkinConsultationManagerTest2.testAddConsultation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="WSM" />
       <extension name="coverage">
         <pattern>
@@ -74,13 +96,69 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.mycompany" />
+      <option name="MAIN_CLASS_NAME" value="com.mycompany.WestminsterSkinConsultationManagerTest2" />
+      <option name="METHOD_NAME" value="testAddConsultation" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WestminsterSkinConsultationManagerTest2.testAddDoctor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="WSM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mycompany.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.mycompany" />
+      <option name="MAIN_CLASS_NAME" value="com.mycompany.WestminsterSkinConsultationManagerTest2" />
+      <option name="METHOD_NAME" value="testAddDoctor" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WestminsterSkinConsultationManagerTest2.testCheckAvailability" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="WSM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mycompany.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.mycompany" />
+      <option name="MAIN_CLASS_NAME" value="com.mycompany.WestminsterSkinConsultationManagerTest2" />
+      <option name="METHOD_NAME" value="testCheckAvailability" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WestminsterSkinConsultationManagerTest2.testDeleteDoctor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="WSM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mycompany.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.mycompany" />
+      <option name="MAIN_CLASS_NAME" value="com.mycompany.WestminsterSkinConsultationManagerTest2" />
+      <option name="METHOD_NAME" value="testDeleteDoctor" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.WestminsterSkinConsultationManagerTest2" />
+        <item itemvalue="JUnit.WestminsterSkinConsultationManagerTest2.testCheckAvailability" />
+        <item itemvalue="JUnit.WestminsterSkinConsultationManagerTest2.testAddConsultation" />
+        <item itemvalue="JUnit.WestminsterSkinConsultationManagerTest2.testDeleteDoctor" />
+        <item itemvalue="JUnit.WestminsterSkinConsultationManagerTest2.testAddDoctor" />
       </list>
     </recent_temporary>
   </component>
@@ -128,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673116148849</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="final">
+      <created>1673117624809</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1673117624809</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -148,7 +233,8 @@
     <MESSAGE value="Finalisz" />
     <MESSAGE value="Save consultations" />
     <MESSAGE value="add consultation to entities" />
-    <option name="LAST_COMMIT_MESSAGE" value="add consultation to entities" />
+    <MESSAGE value="final" />
+    <option name="LAST_COMMIT_MESSAGE" value="final" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -161,11 +247,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/FileHandler.java</url>
           <line>65</line>
           <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/WestminsterSkinConsultationManager.java</url>
-          <line>94</line>
-          <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/GraphicalUserInterface.java</url>
@@ -198,16 +279,6 @@
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/WestminsterSkinConsultationManager.java</url>
-          <line>118</line>
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/WestminsterSkinConsultationManager.java</url>
-          <line>119</line>
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/FileHandler.java</url>
           <line>106</line>
           <option name="timeStamp" value="49" />
@@ -221,6 +292,36 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/FileHandler.java</url>
           <line>111</line>
           <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/WestminsterSkinConsultationManager.java</url>
+          <line>92</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/WestminsterSkinConsultationManager.java</url>
+          <line>87</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/WestminsterSkinConsultationManager.java</url>
+          <line>93</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/mycompany/WestminsterSkinConsultationManagerTest2.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/mycompany/WestminsterSkinConsultationManagerTest2.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/mycompany/WestminsterSkinConsultationManagerTest2.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="60" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

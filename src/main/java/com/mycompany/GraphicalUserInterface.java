@@ -372,7 +372,8 @@ public class GraphicalUserInterface {
             isAvailable = manager.checkAvailability(doctorId, bookingSlot);
             if (isAvailable) {
                 Doctor doctor = WestminsterSkinConsultationManager.getDoctors().get(doctorId);
-                manager.createConsultation(patient, doctor, bookingSlot, cost, notes);
+                Consultation consultation = new Consultation(bookingSlot, doctor, patient, Integer.parseInt(cost), notes);
+                manager.createConsultation(consultation, patient, doctor);
                 JOptionPane.showMessageDialog(null, "The consultation has been scheduled successfully.");
             } else {
                 JOptionPane.showMessageDialog(null, "The doctor you looked for is not available on your booking slot.");
@@ -382,7 +383,8 @@ public class GraphicalUserInterface {
                     isAvailable = manager.checkAvailability(newDocId, bookingSlot);
                     if (isAvailable) {
                         Doctor doctor = WestminsterSkinConsultationManager.getDoctors().get(doctorId);
-                        manager.createConsultation(patient, doctor, bookingSlot, cost, notes);
+                        Consultation consultation = new Consultation(bookingSlot, doctor, patient, Integer.parseInt(cost), notes);
+                        manager.createConsultation(consultation, patient, doctor);
                         break;
                     }
                 }

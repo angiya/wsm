@@ -1,6 +1,5 @@
 package com.mycompany;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -10,7 +9,6 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
     private static List<Patient> patients;
     private List<Consultation> consultations;
 
-    final InputHandler inputHandler = new InputHandler();
     final FileHandler fileHandler  = new FileHandler();
     final GraphicalUserInterface GUI = new GraphicalUserInterface();
 
@@ -19,32 +17,28 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
     }
 
 
+    public WestminsterSkinConsultationManager(String[] args) {
+        doctors = new ArrayList<>();
+        patients = new ArrayList<>();
+        consultations = new ArrayList<>();
+    }
+
+
     public static List<Doctor> getDoctors() {
         return doctors;
     }
-
 
     public static List<Patient> getPatients() {
         return patients;
     }
 
-
-    public int selection() {
-        return inputHandler.selection();
+    public List<Consultation> getConsultations() {
+        return consultations;
     }
 
-
     @Override
-    public void addDoctor() {
-        String name = inputHandler.enterText("name");
-        String surname = inputHandler.enterText("surname");
-        LocalDate dateOfBirth = inputHandler.enterDateOfBirth();
-        String mobileNumber = inputHandler.enterNumber("Mobile");
-        String medicalLicenceNumber = inputHandler.enterNumber("Medical License");
-        String specialisation = inputHandler.enterText("specialisation");
-
-        if (doctors.size() < 10) {
-            Doctor doctor = new Doctor(name, surname, dateOfBirth, mobileNumber, medicalLicenceNumber, specialisation);
+    public void addDoctor(Doctor doctor) {
+      if (doctors.size() < 10) {
             doctors.add(doctor);
             System.out.println("The doctor has been added successfully.");
         } else {
@@ -54,18 +48,9 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
 
 
     @Override
-    public void deleteDoctor() {
-        boolean wasDeleted = false;
-        String medicalLicenceNumber =  inputHandler.enterNumber("Medical License");
-        for (Doctor doctor : doctors) {
-            if (doctor.getMedicalLicenceNumber().equals(medicalLicenceNumber)) {
-                doctors.remove(doctor);
-                System.out.println("The doctor has been removed successfully");
-                wasDeleted = true;
-                break;
-            }
-        }
-        if (!wasDeleted) System.out.println("The Medical Licence Number is not available.");
+    public void deleteDoctor(Doctor doctor) {
+        doctors.remove(doctor);
+        System.out.println("The doctor has been removed successfully");
     }
 
 
@@ -88,8 +73,7 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
 
 
     @Override
-    public void createConsultation(Patient patient, Doctor doctor, LocalDateTime bookingSlot, String cost, String notes) {
-        Consultation consultation = new Consultation(bookingSlot, doctor, patient, Integer.parseInt(cost), notes);
+    public void createConsultation(Consultation consultation, Patient patient, Doctor doctor) {
         doctor.getBookings().add(consultation);
         patient.getBookings().add(consultation);
         consultations.add(consultation);
@@ -98,9 +82,17 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
 
     @Override
     public boolean checkAvailability(int doctorId, LocalDateTime bookingSlot) {
-        Doctor doctor = doctors.get(doctorId);
-        for (Consultation consultation : doctor.getBookings()) {
-            if(consultation.getDateTime().equals(bookingSlot)) return false;
+        Doctor doctor = null;
+        for (Doctor d : getDoctors()) {
+            if (d.getMedicalLicenceNumber().equals(String.valueOf(doctorId))) {
+                doctor = d;
+                break;
+            }
+        }
+        if (doctor != null) {
+            for (Consultation consultation : doctor.getBookings()) {
+                if(consultation.getDateTime().equals(bookingSlot)) return false;
+            }
         }
         return true;
     }

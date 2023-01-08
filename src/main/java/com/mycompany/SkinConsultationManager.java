@@ -3,10 +3,10 @@ package com.mycompany;
 import java.time.LocalDateTime;
 
 public interface SkinConsultationManager {
-    void addDoctor();
-    void deleteDoctor();
+    void addDoctor(Doctor doctor);
+    void deleteDoctor(Doctor doctor);
     void displayDoctors();
-    void createConsultation(Patient patient, Doctor doctor, LocalDateTime bookingSlot, String cost, String notes);
+    void createConsultation(Consultation consultation, Patient patient, Doctor doctor);
     boolean checkAvailability(int doctorId, LocalDateTime bookingSlot);
     void saveData();
     void loadData();

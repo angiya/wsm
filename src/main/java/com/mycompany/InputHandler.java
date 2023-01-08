@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+import static com.mycompany.Main.manager;
+
 public class InputHandler {
     private final Scanner scanner = new Scanner(System.in);
 
@@ -20,6 +22,32 @@ public class InputHandler {
         int selection = scanner.nextInt();
         scanner.nextLine();
         return selection;
+    }
+
+
+    public void handleAddDoctor() {
+        String name = enterText("name");
+        String surname = enterText("surname");
+        LocalDate dateOfBirth = enterDateOfBirth();
+        String mobileNumber = enterNumber("Mobile");
+        String medicalLicenceNumber = enterNumber("Medical License");
+        String specialisation = enterText("specialisation");
+        Doctor doctor = new Doctor(name, surname, dateOfBirth, mobileNumber, medicalLicenceNumber, specialisation);
+        manager.addDoctor(doctor);
+    }
+
+
+    public void handleDeleteDoctor() {
+        boolean isValidInput = false;
+        String medicalLicenceNumber =  enterNumber("Medical License");
+        for (Doctor doctor : WestminsterSkinConsultationManager.getDoctors()) {
+            if (doctor.getMedicalLicenceNumber().equals(medicalLicenceNumber)) {
+                isValidInput = true;
+                manager.deleteDoctor(doctor);
+                break;
+            }
+        }
+        if (!isValidInput) System.out.println("The Medical Licence Number is not available.");
     }
 
     public String enterText(String nameType) {
